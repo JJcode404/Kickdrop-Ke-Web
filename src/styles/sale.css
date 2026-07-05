@@ -1,0 +1,39 @@
+/* ============================================================
+   KICKDROP — Sale page (reuses shop grid + arrivals toolbar)
+   Red is reserved for discount signals only.
+   ============================================================ */
+
+:root {
+  --sale-red: #a8352b;
+}
+
+/* Hero pill — red variant of the arrivals pill */
+.sale__pill {
+  border-color: var(--sale-red);
+  color: var(--sale-red);
+}
+
+/* Discount badge stacked under the black "Sale" badge */
+.sale-card__discount {
+  background: var(--sale-red);
+}
+
+/* Discounted price leads in red; original price stays muted strikethrough */
+.sale-card__price-now {
+  color: var(--sale-red);
+  font-weight: 600;
+}
+
+/* Square-ish size chips (numbers read better without full pill rounding) */
+.sale__size {
+  border-radius: 2px;
+  min-width: 2.6rem;
+  padding-inline: 0.5em;
+  text-align: center;
+}
+
+/* Low-stock pill on sale cards echoes the red urgency */
+.sale-card .arrival-card__limited {
+  border-color: var(--sale-red);
+  color: var(--sale-red);
+}

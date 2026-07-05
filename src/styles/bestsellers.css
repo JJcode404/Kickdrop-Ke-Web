@@ -1,0 +1,72 @@
+/* ============================================================
+   KICKDROP — Best Sellers page (reuses shop grid + arrivals toolbar)
+   Social-proof accents only; everything else inherits.
+   ============================================================ */
+
+/* "Hot Item" badge — gold, stacked under the black "Best Seller" badge */
+.bs-card__hot {
+  background: var(--gold);
+}
+
+/* Rating · sold · trending row */
+.bs-card__proof {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.bs-card__rating {
+  margin-bottom: 0;
+}
+
+/* stars grow slightly on hover — a small nod, not a bounce */
+.bs-card__rating .rating__stars {
+  transition: transform 0.25s var(--ease-out);
+  transform-origin: left center;
+}
+
+.bs-card__rating:hover .rating__stars {
+  transform: scale(1.08);
+}
+
+.bs-card__sold {
+  font-size: 0.8125rem;
+  color: var(--ink-soft);
+}
+
+.bs-card__sold::before {
+  content: "·";
+  margin-right: 0.6rem;
+  color: var(--line);
+}
+
+.bs-card__trend {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* wishlist heart pops when toggled on */
+.bs-card .shop-card__wish[aria-pressed="true"] svg {
+  animation: wish-pop 0.35s var(--ease-out);
+}
+
+@keyframes wish-pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bs-card__rating:hover .rating__stars {
+    transform: none;
+  }
+
+  .bs-card .shop-card__wish[aria-pressed="true"] svg {
+    animation: none;
+  }
+}

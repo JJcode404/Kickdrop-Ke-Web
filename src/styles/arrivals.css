@@ -1,0 +1,190 @@
+/* ============================================================
+   KICKDROP — New Arrivals page (reuses shop grid/card styles)
+   ============================================================ */
+
+/* ---------- Hero ---------- */
+
+.arrivals__hero {
+  max-width: var(--measure);
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.arrivals__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4em 1.1em;
+  border: 1px solid var(--gold);
+  border-radius: 100vmax;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+}
+
+.arrivals__lede {
+  max-width: 38ch;
+}
+
+/* ---------- Filter toolbar ---------- */
+
+.arrivals__toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 2.5rem;
+}
+
+.arrivals__brands {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.arrivals__brand {
+  padding: 0.5em 1.1em;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 100vmax;
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition:
+    background 0.2s var(--ease-out),
+    color 0.2s var(--ease-out),
+    border-color 0.2s var(--ease-out),
+    transform 0.15s var(--ease-out);
+}
+
+.arrivals__brand:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.arrivals__brand:active {
+  transform: scale(0.96);
+}
+
+.arrivals__brand[aria-pressed="true"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+.arrivals__selects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.arrivals__select {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.arrivals__select select {
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 0.55em 0.9em;
+  cursor: pointer;
+  transition: border-color 0.2s var(--ease-out);
+}
+
+.arrivals__select select:hover,
+.arrivals__select select:focus-visible {
+  border-color: var(--ink);
+}
+
+.arrivals__count {
+  margin-left: 0;
+}
+
+@media (min-width: 64rem) {
+  .arrivals__toolbar {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .arrivals__brands {
+    flex: 1 1 100%;
+  }
+
+  .arrivals__count {
+    margin-left: auto;
+  }
+}
+
+/* ---------- Card urgency accents ---------- */
+
+.arrival-card__badges {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 2;
+  display: grid;
+  gap: 0.4rem;
+  justify-items: start;
+}
+
+.arrival-card__badges .product-card__badge {
+  position: static;
+}
+
+.arrival-card__dropped {
+  background: var(--gold);
+}
+
+.arrival-card__limited {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4em 0.95em;
+  background: var(--paper);
+  border: 1px solid var(--gold);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.arrival-card__limited-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: currentColor;
+  animation: limited-pulse 1.8s var(--ease-out) infinite;
+}
+
+@keyframes limited-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.8); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arrival-card__limited-dot {
+    animation: none;
+  }
+}

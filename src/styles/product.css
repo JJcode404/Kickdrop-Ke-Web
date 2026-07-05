@@ -1,0 +1,487 @@
+/* ============================================================
+   KICKDROP — Product details page (mobile-first)
+   ============================================================ */
+
+.pdp {
+  padding-top: calc(var(--space-section) * 0.5 + 3.5rem);
+}
+
+/* ---------- Breadcrumb ---------- */
+
+.pdp__breadcrumb {
+  margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.pdp__breadcrumb ol {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+}
+
+.pdp__breadcrumb li + li::before {
+  content: "/";
+  margin-right: 0.6rem;
+  color: var(--line);
+}
+
+.pdp__breadcrumb a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s var(--ease-out);
+}
+
+.pdp__breadcrumb a:hover,
+.pdp__breadcrumb a:focus-visible {
+  color: var(--gold);
+}
+
+/* ---------- Two-column layout ---------- */
+
+.pdp__layout {
+  display: grid;
+  gap: 2.5rem;
+}
+
+@media (min-width: 64rem) {
+  .pdp__layout {
+    grid-template-columns: 1.15fr 1fr;
+    gap: calc(var(--gutter) * 1.25);
+    align-items: start;
+  }
+}
+
+/* ---------- Gallery ---------- */
+
+.gallery__stage {
+  position: relative;
+}
+
+.gallery__track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+
+.gallery__track::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery__slide {
+  flex: 0 0 100%;
+  aspect-ratio: 4 / 3;
+  scroll-snap-align: start;
+  padding: clamp(1rem, 4%, 2rem);
+  background: var(--paper-warm);
+  border: none;
+  cursor: zoom-in;
+  overflow: hidden;
+}
+
+.gallery__slide .product-photo {
+  transition: transform 0.7s var(--ease-out);
+}
+
+/* subtle hover zoom; click/tap for full zoom */
+.gallery__slide:hover .product-photo {
+  transform: scale(1.05);
+}
+
+.gallery__slide.is-zoomed {
+  cursor: zoom-out;
+}
+
+.gallery__slide.is-zoomed .product-photo {
+  transform: scale(1.7);
+}
+
+.gallery__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 2.75rem;
+  height: 2.75rem;
+  display: grid;
+  place-items: center;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--ink);
+  cursor: pointer;
+  box-shadow: 0 8px 24px -12px rgba(17, 17, 16, 0.35);
+  transition:
+    border-color 0.25s var(--ease-out),
+    opacity 0.25s var(--ease-out),
+    transform 0.2s var(--ease-out);
+}
+
+.gallery__arrow svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.gallery__arrow--prev {
+  left: 0.9rem;
+}
+
+.gallery__arrow--next {
+  right: 0.9rem;
+}
+
+.gallery__arrow:hover:not(:disabled) {
+  border-color: var(--gold);
+  transform: translateY(-50%) scale(1.06);
+}
+
+.gallery__arrow:active:not(:disabled) {
+  transform: translateY(-50%) scale(0.94);
+}
+
+.gallery__arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.gallery__counter {
+  position: absolute;
+  right: 1rem;
+  bottom: 0.85rem;
+  padding: 0.3em 0.9em;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  color: var(--ink-soft);
+}
+
+.gallery__thumbs {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 0.75rem;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+}
+
+.gallery__thumb {
+  flex: 0 0 4.5rem;
+  aspect-ratio: 4 / 3;
+  padding: 0.35rem;
+  background: var(--paper-warm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  opacity: 0.55;
+  transition:
+    opacity 0.25s var(--ease-out),
+    border-color 0.25s var(--ease-out);
+}
+
+.gallery__thumb:hover {
+  opacity: 1;
+}
+
+.gallery__thumb.is-active {
+  opacity: 1;
+  border-color: var(--gold);
+}
+
+/* ---------- Details column ---------- */
+
+.pdp__name {
+  font-size: clamp(1.9rem, 4.5vw, 2.75rem);
+  margin: 0.35rem 0 0.85rem;
+}
+
+.pdp__rating {
+  margin-bottom: 1.1rem;
+}
+
+.pdp__price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.pdp__price-now {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--gold);
+}
+
+.pdp__stock {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 1.75rem;
+}
+
+.pdp__stock-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+}
+
+.pdp__stock--in { color: #2e6b46; }
+.pdp__stock--in .pdp__stock-dot { background: #2e6b46; }
+.pdp__stock--low { color: var(--gold); }
+.pdp__stock--low .pdp__stock-dot { background: var(--gold); }
+.pdp__stock--out { color: #a03d3d; }
+.pdp__stock--out .pdp__stock-dot { background: #a03d3d; }
+
+/* ---------- Options ---------- */
+
+.pdp__options {
+  border: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+}
+
+.pdp__options:disabled .pdp__size,
+.pdp__options:disabled .pdp__color {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.pdp__option-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 0.75rem;
+}
+
+.pdp__option-label strong {
+  color: var(--ink);
+}
+
+.pdp__sizes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.pdp__size {
+  min-width: 3rem;
+  padding: 0.65em 0.6em;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  font-size: 0.9375rem;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition:
+    background 0.2s var(--ease-out),
+    color 0.2s var(--ease-out),
+    border-color 0.2s var(--ease-out),
+    transform 0.15s var(--ease-out);
+}
+
+.pdp__size:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.pdp__size:active {
+  transform: scale(0.95);
+}
+
+.pdp__size[aria-pressed="true"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+.pdp__colors {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.pdp__color {
+  padding: 0.2rem;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: border-color 0.2s var(--ease-out), transform 0.15s var(--ease-out);
+}
+
+.pdp__color:hover {
+  transform: scale(1.08);
+}
+
+.pdp__color[aria-pressed="true"] {
+  border-color: var(--gold);
+}
+
+.swatch--lg {
+  width: 1.75rem;
+  height: 1.75rem;
+  display: block;
+}
+
+/* ---------- Actions ---------- */
+
+.pdp__actions {
+  padding-top: 0.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.pdp__whatsapp {
+  width: 100%;
+  padding-block: 1.15em;
+  font-size: 0.875rem;
+  gap: 0.75em;
+}
+
+.pdp__whatsapp:disabled {
+  opacity: 0.45;
+  cursor: default;
+  pointer-events: none;
+}
+
+.pdp__wa-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: none;
+}
+
+.pdp__cta-hint {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--ink-soft);
+  min-height: 1.65em;
+}
+
+.pdp__secondary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.pdp__heart {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.4em;
+}
+
+.btn[aria-pressed="true"] .pdp__heart {
+  color: var(--gold);
+}
+
+.pdp__share-msg {
+  font-size: 0.8125rem;
+  color: var(--gold);
+}
+
+/* ---------- Info tabs ---------- */
+
+.pdp__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.pdp__tab {
+  padding: 0.85em 1em;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: color 0.2s var(--ease-out), border-color 0.2s var(--ease-out);
+}
+
+.pdp__tab:hover {
+  color: var(--ink);
+}
+
+.pdp__tab[aria-selected="true"] {
+  color: var(--ink);
+  border-bottom-color: var(--gold);
+}
+
+.pdp__panel {
+  padding: 1.5rem 0 0;
+  color: var(--ink-soft);
+  max-width: 56ch;
+}
+
+.pdp__panel p + p {
+  margin-top: 0.85rem;
+}
+
+.pdp__panel[hidden] {
+  display: none;
+}
+
+.pdp__feature-list {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.pdp__feature-list li {
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.pdp__feature-list li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
+
+/* ---------- Shop card links (hover affordance) ---------- */
+
+.shop-card__img-link {
+  display: block;
+  height: 100%;
+}
+
+.shop-card__name-link {
+  text-decoration: none;
+  transition: color 0.2s var(--ease-out);
+}
+
+.shop-card__name-link:hover,
+.shop-card__name-link:focus-visible {
+  color: var(--gold);
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery__track {
+    scroll-behavior: auto;
+  }
+
+  .gallery__slide .product-photo {
+    transition: none;
+  }
+
+  .gallery__slide:hover .product-photo {
+    transform: none;
+  }
+
+  /* keep tap-to-zoom working — it's user-initiated, just not animated */
+  .gallery__slide.is-zoomed .product-photo {
+    transform: scale(1.7);
+  }
+}

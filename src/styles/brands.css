@@ -1,0 +1,271 @@
+/* ============================================================
+   KICKDROP — Brands page (logo wall + featured editorial cards)
+   ============================================================ */
+
+/* ---------- Featured section ---------- */
+
+.brands__featured-wrap {
+  position: relative;
+  margin-bottom: clamp(3rem, 7vw, 5rem);
+}
+
+.brands__glow {
+  position: absolute;
+  top: -20%;
+  right: -8%;
+  width: min(50vw, 28rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(194, 163, 94, 0.14) 0%,
+    rgba(194, 163, 94, 0) 68%
+  );
+  pointer-events: none;
+}
+
+.brands__subheading {
+  font-size: 1.35rem;
+  margin-bottom: 1.5rem;
+}
+
+.brands__subheading--grid {
+  margin-bottom: 0;
+  margin-right: auto;
+}
+
+.brands__featured {
+  position: relative;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.brand-featured {
+  animation: card-in 0.55s var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 90ms);
+}
+
+.brand-featured__link {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  height: 100%;
+  padding: 2rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  text-decoration: none;
+  transition:
+    transform 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out),
+    border-color 0.35s var(--ease-out);
+}
+
+.brand-featured__link:hover,
+.brand-featured__link:focus-visible {
+  transform: translateY(-4px);
+  border-color: var(--gold);
+  box-shadow: 0 28px 56px -28px rgba(17, 17, 16, 0.3);
+}
+
+.brand-featured__badge {
+  position: absolute;
+  top: 1.25rem;
+  left: auto;
+  right: 1.25rem;
+  background: var(--gold);
+}
+
+.brand-featured__logo {
+  height: 4.5rem;
+  display: grid;
+  place-items: start;
+  align-items: center;
+}
+
+.brand-featured__logo img {
+  max-height: 3.5rem;
+  max-width: 9rem;
+  width: auto;
+  object-fit: contain;
+}
+
+.brand-featured__name {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  display: block;
+}
+
+.brand-featured__tagline {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0.35rem 0 0.75rem;
+}
+
+.brand-featured__blurb {
+  display: block;
+  font-size: 0.9375rem;
+  color: var(--ink-soft);
+  margin-bottom: 1.25rem;
+}
+
+.brand-featured__cta {
+  display: block;
+  margin-top: auto;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.brand-featured__cta .arrow {
+  display: inline-block;
+  transition: transform 0.3s var(--ease-out);
+}
+
+.brand-featured__link:hover .arrow,
+.brand-featured__link:focus-visible .arrow {
+  transform: translateX(6px);
+}
+
+@media (min-width: 48rem) {
+  .brands__featured {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ---------- Logo wall ---------- */
+
+.brands__grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 40rem) {
+  .brands__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 64rem) {
+  .brands__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 80rem) {
+  .brands__grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.brand-card-wrap {
+  animation: card-in 0.55s var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 50ms);
+}
+
+.brand-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+  padding: 2rem 1.25rem 1.75rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  text-decoration: none;
+  transition:
+    transform 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out),
+    border-color 0.35s var(--ease-out);
+}
+
+.brand-card:hover,
+.brand-card:focus-visible {
+  transform: translateY(-4px) scale(1.01);
+  border-color: var(--gold);
+  box-shadow: 0 24px 48px -24px rgba(17, 17, 16, 0.28);
+}
+
+.brand-card__logo {
+  height: 3.25rem;
+  display: grid;
+  place-items: center;
+  margin-bottom: 1.1rem;
+}
+
+.brand-card__logo img {
+  max-height: 2.75rem;
+  max-width: 6.5rem;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(1) opacity(0.65);
+  transition: filter 0.35s var(--ease-out);
+}
+
+.brand-card:hover .brand-card__logo img,
+.brand-card:focus-visible .brand-card__logo img {
+  filter: none;
+}
+
+.brand-card__name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+}
+
+.brand-card__tagline {
+  font-size: 0.8125rem;
+  color: var(--ink-soft);
+  margin-bottom: 0.85rem;
+}
+
+.brand-card__count {
+  margin-top: auto;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* ---------- Skeletons ---------- */
+
+.brand-skel {
+  align-items: center;
+  border: 1px solid var(--line);
+  padding: 2rem 1.25rem;
+}
+
+.brand-skel__logo {
+  width: 5rem;
+  height: 2.75rem;
+  margin-bottom: 0.75rem;
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-featured,
+  .brand-card-wrap {
+    animation: none;
+  }
+
+  .brand-featured__link,
+  .brand-featured__link:hover,
+  .brand-card,
+  .brand-card:hover {
+    transform: none;
+  }
+
+  .brand-card__logo img {
+    filter: none;
+  }
+}

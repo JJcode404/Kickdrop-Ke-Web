@@ -1,0 +1,660 @@
+/* ============================================================
+   KICKDROP — Shop page (mobile-first, reuses global tokens)
+   ============================================================ */
+
+/* ---------- Page transition ---------- */
+
+.page-fade {
+  animation: page-in 0.45s var(--ease-out);
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Header & toolbar ---------- */
+
+.shop {
+  padding-top: calc(var(--space-section) * 0.75 + 3.5rem); /* clear fixed navbar */
+}
+
+.shop__header {
+  max-width: var(--measure);
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.shop__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 2.5rem;
+}
+
+.shop__search {
+  position: relative;
+  flex: 1 1 16rem;
+  max-width: 28rem;
+}
+
+.shop__search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.1rem;
+  height: 1.1rem;
+  color: var(--ink-soft);
+  pointer-events: none;
+}
+
+.shop__search input {
+  width: 100%;
+  padding: 0.8em 1.1em 0.8em 2.9em;
+  font: inherit;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  transition: border-color 0.3s var(--ease-out);
+}
+
+.shop__search input::placeholder {
+  color: var(--ink-soft);
+}
+
+.shop__search input:focus {
+  outline: none;
+  border-color: var(--ink);
+}
+
+.shop__count {
+  margin-left: auto;
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* ---------- Layout: sidebar + results ---------- */
+
+.shop__layout {
+  display: grid;
+  gap: 2.5rem;
+}
+
+@media (min-width: 64rem) {
+  .shop__layout {
+    grid-template-columns: 15rem 1fr;
+    align-items: start;
+  }
+
+  .shop__filters-toggle {
+    display: none;
+  }
+}
+
+/* ---------- Filter panel ---------- */
+
+.filter-panel {
+  /* Mobile: off-canvas drawer */
+  position: fixed;
+  inset-block: 0;
+  left: 0;
+  z-index: 70;
+  width: min(85vw, 21rem);
+  padding: 1.5rem var(--gutter) 3rem;
+  background: var(--paper);
+  overflow-y: auto;
+  transform: translateX(-105%);
+  visibility: hidden;
+  /* delay hiding until the slide-out finishes */
+  transition:
+    transform 0.35s var(--ease-out),
+    visibility 0s linear 0.35s;
+}
+
+.filter-panel.is-open {
+  transform: translateX(0);
+  visibility: visible;
+  transition: transform 0.35s var(--ease-out);
+  box-shadow: 0 0 60px rgba(17, 17, 16, 0.25);
+}
+
+.shop__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(17, 17, 16, 0.45);
+  border: none;
+  cursor: pointer;
+}
+
+.filter-panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.filter-panel__title {
+  font-size: 1.35rem;
+}
+
+.filter-panel__close {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: grid;
+  place-items: center;
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.filter-panel__close svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+@media (min-width: 64rem) {
+  .filter-panel {
+    position: sticky;
+    top: 6rem;
+    z-index: 1;
+    width: auto;
+    padding: 0;
+    transform: none;
+    visibility: visible;
+    overflow: visible;
+    max-height: calc(100vh - 7rem);
+    overflow-y: auto;
+    transition: none;
+  }
+
+  .filter-panel.is-open {
+    box-shadow: none;
+  }
+
+  .filter-panel__head {
+    margin-bottom: 1rem;
+  }
+
+  .filter-panel__title {
+    font-size: 1.15rem;
+  }
+
+  .filter-panel__close,
+  .shop__backdrop,
+  .filter-panel__apply {
+    display: none;
+  }
+}
+
+.filter-group {
+  border: none;
+  padding: 1.25rem 0;
+  margin: 0;
+  border-top: 1px solid var(--line);
+}
+
+.filter-group legend {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding-top: 1.25rem;
+}
+
+.filter-panel__actions {
+  display: flex;
+  gap: 0.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.filter-panel__actions .btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Checkbox / radio rows */
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.4rem 0;
+  cursor: pointer;
+  font-size: 0.9375rem;
+  color: var(--ink-soft);
+  transition: color 0.2s var(--ease-out);
+}
+
+.check:hover {
+  color: var(--ink);
+}
+
+.check input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.check__box {
+  flex: none;
+  width: 1.05rem;
+  height: 1.05rem;
+  border: 1px solid var(--ink-soft);
+  display: grid;
+  place-items: center;
+  transition: background 0.2s var(--ease-out), border-color 0.2s var(--ease-out);
+}
+
+.check__box--round {
+  border-radius: 50%;
+}
+
+.check__box::after {
+  content: "";
+  width: 0.45rem;
+  height: 0.45rem;
+  background: var(--paper);
+  transform: scale(0);
+  transition: transform 0.2s var(--ease-out);
+}
+
+.check__box--round::after {
+  border-radius: 50%;
+}
+
+.check input:checked ~ .check__box {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+.check input:checked ~ .check__box::after {
+  transform: scale(1);
+}
+
+.check input:focus-visible ~ .check__box {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.check input:checked ~ .check__label {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.check__label--swatch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* Size chips */
+
+.filter-group__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chip input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.chip__face {
+  display: grid;
+  place-items: center;
+  min-width: 2.6rem;
+  padding: 0.45em 0.5em;
+  border: 1px solid var(--line);
+  font-size: 0.8125rem;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition:
+    background 0.2s var(--ease-out),
+    color 0.2s var(--ease-out),
+    border-color 0.2s var(--ease-out);
+}
+
+.chip:hover .chip__face {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.chip input:checked ~ .chip__face {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+.chip input:focus-visible ~ .chip__face {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* Color swatches */
+
+.swatch {
+  display: inline-block;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(17, 17, 16, 0.18);
+}
+
+/* ---------- Product grid ---------- */
+
+.shop-grid {
+  display: grid;
+  gap: 2.25rem 1.5rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 40rem) {
+  .shop-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 64rem) {
+  .shop-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 80rem) {
+  .shop-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ---------- Product card ---------- */
+
+.shop-card {
+  animation: card-in 0.55s var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 50ms);
+  transition: transform 0.35s var(--ease-out);
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.shop-card:hover {
+  transform: translateY(-4px);
+}
+
+.shop-card__media {
+  position: relative;
+  aspect-ratio: 1;
+  margin-bottom: 1.1rem;
+  transition: box-shadow 0.35s var(--ease-out);
+}
+
+.shop-card:hover .shop-card__media {
+  box-shadow: 0 24px 48px -24px rgba(17, 17, 16, 0.3);
+}
+
+.product-card__badge--sale {
+  background: var(--gold);
+}
+
+.shop-card__wish {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  z-index: 2;
+  width: 2.4rem;
+  height: 2.4rem;
+  display: grid;
+  place-items: center;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--ink);
+  cursor: pointer;
+  transition:
+    color 0.25s var(--ease-out),
+    border-color 0.25s var(--ease-out),
+    transform 0.2s var(--ease-out);
+}
+
+.shop-card__wish svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.shop-card__wish:hover {
+  transform: scale(1.08);
+  border-color: var(--gold);
+}
+
+.shop-card__wish:active {
+  transform: scale(0.94);
+}
+
+.shop-card__wish[aria-pressed="true"] {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
+/* Add to Cart — revealed on hover / keyboard focus; always visible on touch */
+
+.shop-card__cart {
+  position: absolute;
+  left: 50%;
+  bottom: 1rem;
+  z-index: 2;
+  transform: translate(-50%, 10px);
+  opacity: 0;
+  white-space: nowrap;
+  transition:
+    opacity 0.3s var(--ease-out),
+    transform 0.3s var(--ease-out),
+    color 0.3s var(--ease-out),
+    border-color 0.3s var(--ease-out);
+}
+
+.shop-card:hover .shop-card__cart,
+.shop-card:focus-within .shop-card__cart {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+@media (hover: none) {
+  .shop-card__cart {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+/* Sold out */
+
+.shop-card__media.is-soldout .product-photo {
+  opacity: 0.45;
+}
+
+.shop-card__soldout {
+  position: absolute;
+  left: 50%;
+  bottom: 1rem;
+  transform: translateX(-50%);
+  padding: 0.55em 1.4em;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* Card body */
+
+.shop-card__name {
+  font-size: 1.15rem;
+  margin: 0.15rem 0 0.4rem;
+}
+
+.rating {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.rating__stars {
+  position: relative;
+  display: inline-block;
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+  line-height: 1;
+}
+
+.rating__base {
+  color: var(--line);
+}
+
+.rating__fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  overflow: hidden;
+  white-space: nowrap;
+  color: var(--gold);
+}
+
+.rating__meta {
+  font-size: 0.8125rem;
+  color: var(--ink-soft);
+}
+
+.shop-card__price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-bottom: 0.75rem;
+}
+
+.shop-card__price-now {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.shop-card__price-was {
+  font-size: 0.875rem;
+  color: var(--ink-soft);
+}
+
+.shop-card__swatches {
+  display: flex;
+  gap: 0.45rem;
+}
+
+/* ---------- Skeleton loaders ---------- */
+
+.skel-card {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.skel {
+  background: linear-gradient(
+    100deg,
+    var(--paper-warm) 40%,
+    #efece5 50%,
+    var(--paper-warm) 60%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+
+.skel--media {
+  aspect-ratio: 1;
+  margin-bottom: 0.5rem;
+}
+
+.skel--line {
+  height: 0.85rem;
+}
+
+.skel--w30 { width: 30%; }
+.skel--w40 { width: 40%; }
+.skel--w80 { width: 80%; }
+
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+/* ---------- Empty state ---------- */
+
+.shop__empty {
+  padding: clamp(3rem, 8vw, 6rem) 1rem;
+  text-align: center;
+  border: 1px dashed var(--line);
+}
+
+.shop__empty-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.shop__empty-body {
+  color: var(--ink-soft);
+  max-width: 34ch;
+  margin: 0 auto 1.75rem;
+}
+
+/* ---------- Active nav link ---------- */
+
+.navbar__links a.active:not(.btn) {
+  color: var(--gold);
+}
+
+.navbar__links a.active:not(.btn)::after {
+  transform: scaleX(1);
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .page-fade,
+  .shop-card,
+  .skel {
+    animation: none;
+  }
+
+  .shop-card,
+  .shop-card:hover {
+    transform: none;
+  }
+
+  .filter-panel {
+    transition: none;
+  }
+}
