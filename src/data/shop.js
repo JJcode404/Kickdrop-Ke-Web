@@ -10,6 +10,8 @@ export const SWATCH_HEX = {
   Gum: "#b07a4a",
   Silver: "#c9ccd0",
   Clay: "#c68e5f",
+  Pink: "#e79fc4",
+  Blue: "#a8c8e0",
 };
 
 const r = (from, to) => {
@@ -40,6 +42,15 @@ const META = {
   "vans-knu-skool": { brand: "Vans", rating: 4.6, reviews: 264, colors: ["Black", "White"], sizes: r(36, 45), added: 20, isNew: true },
   "jordan-1-retro-high-og": { brand: "Jordan", rating: 4.9, reviews: 903, colors: ["Ochre", "Black", "White"], sizes: r(38, 46), added: 15, lowStock: true },
   "on-cloud-5": { brand: "On", rating: 4.5, reviews: 341, colors: ["Black"], sizes: r(38, 46), added: 13, salePrice: 21250 },
+  "nike-air-force-1-black": { brand: "Nike", rating: 4.8, reviews: 1096, colors: ["Black"], sizes: r(38, 46), added: 21 },
+  "new-balance-9060-shadow-grey": { brand: "New Balance", rating: 4.7, reviews: 154, colors: ["Grey", "Black"], sizes: r(38, 46), added: 22 },
+  "new-balance-530": { brand: "New Balance", rating: 4.7, reviews: 611, colors: ["White", "Silver"], sizes: r(36, 46), added: 23 },
+  "new-balance-530-pink": { brand: "New Balance", rating: 4.6, reviews: 203, colors: ["White", "Pink"], sizes: r(36, 45), added: 24, isNew: true },
+  "asics-gel-kayano-14-pink-glow": { brand: "ASICS", rating: 4.7, reviews: 142, colors: ["Pink", "Silver"], sizes: r(36, 42), added: 25, isNew: true },
+  "asics-gel-kayano-14-arctic-sky": { brand: "ASICS", rating: 4.7, reviews: 188, colors: ["Blue", "Silver"], sizes: r(36, 45), added: 26, isNew: true },
+  "new-balance-1000-pink": { brand: "New Balance", rating: 4.6, reviews: 87, colors: ["Pink", "Cream"], sizes: r(36, 45), added: 27, isNew: true },
+  "jordan-4-white-oreo": { brand: "Jordan", rating: 4.8, reviews: 356, colors: ["White", "Grey"], sizes: r(38, 46), added: 28, isNew: true },
+  "jordan-1-low-travis-scott": { brand: "Jordan", rating: 4.9, reviews: 412, colors: ["Black"], sizes: r(38, 46), added: 29, isNew: true, lowStock: true },
 };
 
 export const shopProducts = products.map((p) => ({ ...p, ...META[p.id] }));
@@ -109,15 +120,31 @@ const HOT_IDS = new Set(bestSellersRanked.slice(0, 3).map((p) => p.id));
 export const isHotItem = (p) => HOT_IDS.has(p.id);
 
 /* Momentum: flagged as trending in the catalogue, or a very fresh drop. */
-export const isTrendingUp = (p) => p.badge === "Trending" || p.added >= 19;
+export const isTrendingUp = (p) => p.badge === "Trending" || isJustDropped(p);
 
 /* The 8 most recent releases, newest first. `added` ranks recency. */
 export const newArrivals = [...shopProducts]
   .sort((a, b) => b.added - a.added)
   .slice(0, 8);
 
-/* The freshest couple of drops get extra urgency treatment */
-export const isJustDropped = (p) => p.added >= 19;
+/* Only the very freshest drops get extra urgency treatment */
+const JUST_DROPPED = new Set(newArrivals.slice(0, 3).map((p) => p.id));
+export const isJustDropped = (p) => JUST_DROPPED.has(p.id);
+
+/* Same category ranks highest, then same brand; popular pairs backfill. */
+export function relatedTo(product, limit = 4) {
+  return shopProducts
+    .filter((p) => p.id !== product.id)
+    .map((p) => ({
+      p,
+      score:
+        (p.category === product.category ? 2 : 0) +
+        (p.brand === product.brand ? 1 : 0),
+    }))
+    .sort((a, b) => b.score - a.score || b.p.reviews - a.p.reviews)
+    .slice(0, limit)
+    .map((x) => x.p);
+}
 
 export const stockStatus = (p) =>
   p.soldOut

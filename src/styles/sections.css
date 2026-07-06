@@ -23,17 +23,18 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: clamp(0.25rem, 2vw, 1rem);
   max-width: 80rem;
   margin-inline: auto;
-  padding: 1.1rem var(--gutter);
+  padding: 1.1rem clamp(1rem, 4vw, 4rem);
 }
 
 .navbar__brand {
   font-family: var(--font-display);
-  font-size: 1.35rem;
+  font-size: clamp(0.95rem, 3.2vw, 1.35rem);
   letter-spacing: 0.12em;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .navbar__brand-dot {
@@ -42,9 +43,10 @@
 
 .navbar__toggle {
   display: inline-flex;
+  flex: none;
   flex-direction: column;
   gap: 6px;
-  padding: 0.75rem 0.5rem;
+  padding: 0.75rem 0.4rem;
   background: none;
   border: none;
   cursor: pointer;
@@ -78,6 +80,8 @@
   gap: 1.25rem;
   background: var(--paper);
   border-bottom: 1px solid var(--line);
+  max-height: calc(100vh - 4.5rem);
+  overflow-y: auto;
 }
 
 .navbar__links.is-open {
@@ -90,6 +94,11 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   position: relative;
+  white-space: nowrap;
+}
+
+.navbar__links .btn {
+  white-space: nowrap;
 }
 
 /* underline micro-interaction */
@@ -112,7 +121,8 @@
   transform-origin: left;
 }
 
-@media (min-width: 48rem) {
+/* Inline menu only when everything genuinely fits on one row */
+@media (min-width: 76rem) {
   .navbar__toggle {
     display: none;
   }
@@ -122,10 +132,12 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 2.25rem;
+    gap: clamp(1.25rem, 2vw, 2.25rem);
     padding: 0;
     background: none;
     border: none;
+    max-height: none;
+    overflow: visible;
   }
 }
 
@@ -1180,6 +1192,22 @@
 .footer__col a:focus-visible,
 .footer__legal a:hover,
 .footer__legal a:focus-visible {
+  color: var(--gold-bright);
+}
+
+.footer__link-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  font-size: 0.9375rem;
+  color: var(--dark-soft);
+  cursor: pointer;
+  transition: color 0.25s var(--ease-out);
+}
+
+.footer__link-btn:hover,
+.footer__link-btn:focus-visible {
   color: var(--gold-bright);
 }
 

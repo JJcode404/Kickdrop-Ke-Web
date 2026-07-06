@@ -1,0 +1,141 @@
+/* ============================================================
+   KICKDROP — informational pages (About, Delivery, Privacy, …)
+   ============================================================ */
+
+.info {
+  padding-top: calc(var(--space-section) * 0.75 + 3.5rem);
+}
+
+.info__header {
+  max-width: var(--measure);
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+  padding-bottom: clamp(1.5rem, 4vw, 2.5rem);
+  border-bottom: 1px solid var(--line);
+}
+
+.info__body {
+  max-width: 46rem;
+  display: grid;
+  gap: clamp(2.25rem, 5vw, 3rem);
+}
+
+.info__body section > h2 {
+  font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+  margin-bottom: 0.85rem;
+}
+
+.info__body p {
+  color: var(--ink-soft);
+}
+
+.info__body p + p {
+  margin-top: 0.85rem;
+}
+
+.info__body a {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.info__body a:hover,
+.info__body a:focus-visible {
+  text-decoration: underline;
+}
+
+/* Gold-dash lists (same language as the showcase details) */
+.info__list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 0.85rem;
+}
+
+.info__list li {
+  position: relative;
+  padding-left: 1.5rem;
+  color: var(--ink-soft);
+}
+
+.info__list li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
+
+.info__list strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* Key-figure row (About page) */
+.info__stats {
+  list-style: none;
+  padding: 1.75rem 0;
+  margin-top: 0.5rem;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+}
+
+.info__stat-value {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.1;
+}
+
+.info__stat-label {
+  font-size: 0.8125rem;
+  color: var(--ink-soft);
+}
+
+/* Delivery-zone rows */
+.info__rows {
+  display: grid;
+  gap: 0;
+  margin-top: 0.85rem;
+  border-top: 1px solid var(--line);
+}
+
+.info__row {
+  display: grid;
+  gap: 0.2rem 1.5rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.info__row dt {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.info__row dd {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+}
+
+@media (min-width: 40rem) {
+  .info__row {
+    grid-template-columns: minmax(11rem, 1fr) 2fr;
+    align-items: baseline;
+  }
+}
+
+.info__note {
+  font-size: 0.875rem;
+  color: var(--ink-soft);
+  border-left: 2px solid var(--gold);
+  padding-left: 1.25rem;
+}
+
+.info__updated {
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}

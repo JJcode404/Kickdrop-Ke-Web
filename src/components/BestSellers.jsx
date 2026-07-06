@@ -2,9 +2,12 @@ import { Link } from "react-router-dom";
 import useReveal from "../hooks/useReveal.js";
 import SectionHeading from "./SectionHeading.jsx";
 import { products, formatPrice } from "../data/products.js";
+import { useStore } from "../store/StoreContext.jsx";
 
 function ProductCard({ product, index }) {
   const ref = useReveal();
+  const { isWished, toggleWish } = useStore();
+  const wished = isWished(product.id);
   return (
     <li
       className="product-card reveal"
@@ -13,6 +16,21 @@ function ProductCard({ product, index }) {
     >
       <div className="media-zoom product-card__media">
         {product.badge && <span className="product-card__badge">{product.badge}</span>}
+        <button
+          type="button"
+          className="shop-card__wish"
+          aria-pressed={wished}
+          aria-label={
+            wished
+              ? `Remove ${product.name} from wishlist`
+              : `Add ${product.name} to wishlist`
+          }
+          onClick={() => toggleWish(product.id)}
+        >
+          <svg viewBox="0 0 24 24" fill={wished ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" aria-hidden="true">
+            <path d="M12 20.5C7.5 16.5 3.5 13.2 3.5 9.1 3.5 6.4 5.6 4.5 8 4.5c1.6 0 3 .8 4 2.1 1-1.3 2.4-2.1 4-2.1 2.4 0 4.5 1.9 4.5 4.6 0 4.1-4 7.4-8.5 11.4z" />
+          </svg>
+        </button>
         <Link
           to={`/product/${product.id}`}
           className="shop-card__img-link"

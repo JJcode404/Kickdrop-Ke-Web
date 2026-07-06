@@ -188,3 +188,131 @@
     animation: none;
   }
 }
+
+/* ---------- Wishlist page ---------- */
+
+.wl__hero {
+  margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.wl__count {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.wl-signin {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 1.5rem 1.75rem;
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--gold);
+  margin-bottom: 2.5rem;
+}
+
+.wl-signin__text {
+  color: var(--ink-soft);
+  max-width: 42ch;
+}
+
+/* "Never miss a thing" signup */
+
+.wl-news {
+  max-width: 34rem;
+  margin-top: clamp(3.5rem, 8vw, 6rem);
+  padding-top: clamp(2rem, 5vw, 3rem);
+  border-top: 1px solid var(--line);
+}
+
+.wl-news__title {
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  margin-bottom: 0.75rem;
+}
+
+.wl-news__lede {
+  color: var(--ink-soft);
+  margin-bottom: 1.75rem;
+}
+
+.wl-news__by {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 0.6rem;
+}
+
+.wl-news__channels {
+  margin-bottom: 1.25rem;
+}
+
+.wl-news__channel {
+  display: inline-block;
+  padding: 0.45em 1.3em;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.wl-news__form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.wl-news__form input {
+  flex: 1;
+  padding: 0.9em 1.1em;
+  font: inherit;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  transition: border-color 0.25s var(--ease-out);
+}
+
+.wl-news__form input:focus {
+  outline: none;
+  border-color: var(--ink);
+}
+
+.wl-news__form input[aria-invalid="true"] {
+  border-color: #a8352b;
+}
+
+@media (min-width: 40rem) {
+  .wl-news__form {
+    flex-direction: row;
+  }
+}
+
+.wl-news__status {
+  min-height: 1.6em;
+  margin-top: 0.6rem;
+  font-size: 0.875rem;
+  color: var(--gold);
+}
+
+.wl-news__legal {
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+
+.wl-news__legal a {
+  color: var(--ink);
+}
+
+.wl-news__legal a:hover,
+.wl-news__legal a:focus-visible {
+  color: var(--gold);
+}

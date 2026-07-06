@@ -156,6 +156,64 @@ export const products = [
     category: "Performance Running",
     price: 25000,
   },
+  {
+    id: "nike-air-force-1-black",
+    name: "Nike Air Force 1 '07 Black",
+    category: "Lifestyle",
+    price: 14500,
+  },
+  {
+    id: "asics-gel-kayano-14-arctic-sky",
+    name: "ASICS GEL-Kayano 14 “Arctic Sky”",
+    category: "Retro Running",
+    price: 23500,
+    badge: "New",
+  },
+  {
+    id: "asics-gel-kayano-14-pink-glow",
+    name: "ASICS GEL-Kayano 14 Pink Glow",
+    category: "Retro Running",
+    price: 23500,
+    badge: "New",
+  },
+  {
+    id: "new-balance-530-pink",
+    name: "New Balance 530 Pink",
+    category: "Retro Running",
+    price: 16500,
+  },
+  {
+    id: "new-balance-530",
+    name: "New Balance 530",
+    category: "Retro Running",
+    price: 15500,
+  },
+  {
+    id: "new-balance-1000-pink",
+    name: "New Balance 1000 Real Pink",
+    category: "Retro Running",
+    price: 24500,
+    badge: "New",
+  },
+  {
+    id: "new-balance-9060-shadow-grey",
+    name: "New Balance 9060 Shadow Grey",
+    category: "Lifestyle Running",
+    price: 22500,
+  },
+  {
+    id: "jordan-1-low-travis-scott",
+    name: "Jordan 1 Low OG Travis Scott Black Phantom",
+    category: "Retro Basketball",
+    price: 89500,
+    badge: "Coveted",
+  },
+  {
+    id: "jordan-4-white-oreo",
+    name: "Air Jordan 4 Retro “White Oreo”",
+    category: "Retro Basketball",
+    price: 38500,
+  },
 ].map((p) => ({ ...p, image: img(p.id), alt: `${p.name}, side profile` }));
 
 export const showcase = {

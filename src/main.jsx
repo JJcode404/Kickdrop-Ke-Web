@@ -9,6 +9,9 @@ import "./styles/arrivals.css";
 import "./styles/sale.css";
 import "./styles/bestsellers.css";
 import "./styles/brands.css";
+import "./styles/info.css";
+import "./styles/cart.css";
+import "./styles/auth.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

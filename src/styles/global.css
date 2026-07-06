@@ -144,6 +144,9 @@ h3 {
   text-decoration: none;
   cursor: pointer;
   position: relative;
+  /* own stacking context so the ::before wipe paints above the button's
+     background (solid on --primary/--gold) but below the label text */
+  z-index: 0;
   overflow: hidden;
   transition:
     color 0.3s var(--ease-out),
@@ -176,6 +179,12 @@ h3 {
 
 .btn:active {
   transform: scale(0.97);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+  pointer-events: none;
 }
 
 .btn--primary {

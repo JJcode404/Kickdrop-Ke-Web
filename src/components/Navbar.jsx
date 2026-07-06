@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { useStore } from "../store/StoreContext.jsx";
 
 const LINKS = [
   { href: "/", label: "Home", end: true },
@@ -13,6 +14,7 @@ const LINKS = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { cartCount, wishlist, setCartOpen, setAuthOpen, user } = useStore();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -73,6 +75,47 @@ export default function Navbar() {
             </a>
           </li>
         </ul>
+
+        <div className="navbar__actions">
+          <button
+            type="button"
+            className="navbar__icon-btn"
+            onClick={() => setAuthOpen(true)}
+            aria-label={user ? `Account: ${user.name}` : "Sign in"}
+          >
+            <svg viewBox="0 0 24 24" fill={user ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <circle cx="12" cy="8" r="3.5" />
+              <path d="M5 20c.8-3.6 3.7-5.5 7-5.5s6.2 1.9 7 5.5" />
+            </svg>
+          </button>
+
+          <Link
+            to="/wishlist"
+            className="navbar__icon-btn"
+            aria-label={`Wishlist, ${wishlist.length} items`}
+          >
+            <svg viewBox="0 0 24 24" fill={wishlist.length ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" aria-hidden="true">
+              <path d="M12 20.5C7.5 16.5 3.5 13.2 3.5 9.1 3.5 6.4 5.6 4.5 8 4.5c1.6 0 3 .8 4 2.1 1-1.3 2.4-2.1 4-2.1 2.4 0 4.5 1.9 4.5 4.6 0 4.1-4 7.4-8.5 11.4z" />
+            </svg>
+            {wishlist.length > 0 && (
+              <span className="navbar__badge" aria-hidden="true">{wishlist.length}</span>
+            )}
+          </Link>
+
+          <button
+            type="button"
+            className="navbar__icon-btn"
+            onClick={() => setCartOpen(true)}
+            aria-label={`Shopping bag, ${cartCount} items`}
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" aria-hidden="true">
+              <path d="M6 8h12l-1 12.5a1 1 0 0 1-1 .5H8a1 1 0 0 1-1-.5zM9 8V6.5a3 3 0 0 1 6 0V8" />
+            </svg>
+            {cartCount > 0 && (
+              <span className="navbar__badge" aria-hidden="true">{cartCount}</span>
+            )}
+          </button>
+        </div>
       </nav>
     </header>
   );

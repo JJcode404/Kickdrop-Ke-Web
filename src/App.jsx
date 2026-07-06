@@ -9,6 +9,15 @@ import NewArrivals from "./pages/NewArrivals.jsx";
 import Sale from "./pages/Sale.jsx";
 import BestSellers from "./pages/BestSellers.jsx";
 import Brands from "./pages/Brands.jsx";
+import About from "./pages/info/About.jsx";
+import Delivery from "./pages/info/Delivery.jsx";
+import Returns from "./pages/info/Returns.jsx";
+import Privacy from "./pages/info/Privacy.jsx";
+import Terms from "./pages/info/Terms.jsx";
+import Wishlist from "./pages/Wishlist.jsx";
+import CartDrawer from "./components/CartDrawer.jsx";
+import AuthModal from "./components/AuthModal.jsx";
+import { StoreProvider } from "./store/StoreContext.jsx";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -37,9 +46,17 @@ function AppShell() {
           <Route path="/best-sellers" element={<BestSellers />} />
           <Route path="/brands" element={<Brands />} />
           <Route path="/sale" element={<Sale />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/delivery" element={<Delivery />} />
+          <Route path="/returns" element={<Returns />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/wishlist" element={<Wishlist />} />
           <Route path="*" element={<Home />} />
         </Routes>
       </main>
+      <CartDrawer />
+      <AuthModal />
       <Footer />
     </>
   );
@@ -48,7 +65,9 @@ function AppShell() {
 export default function App() {
   return (
     <BrowserRouter>
-      <AppShell />
+      <StoreProvider>
+        <AppShell />
+      </StoreProvider>
     </BrowserRouter>
   );
 }

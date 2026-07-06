@@ -25,6 +25,7 @@ src/
     Sale.jsx                 Discounted pairs, biggest discount first
     BestSellers.jsx          Sales-ranked favorites with social proof
     Brands.jsx               Brand discovery: featured editorial + logo wall
+    info/                    About, Delivery, Returns, Privacy, Terms
   components/
     shop/
       FilterPanel.jsx        Sidebar (desktop) / drawer (mobile) filter controls
@@ -58,9 +59,13 @@ src/
 ## Routes
 
 `/` is the landing page. `/shop` is the full catalogue; `/product/:id` is the
-product details page (ordering happens via WhatsApp — set the store number in
-`src/pages/Product.jsx`). `/new-arrivals`, `/sale`, `/best-sellers`, and
-`/brands` are dedicated pages. Brand cards deep-link to `/shop?brand=<name>`,
+product details page. Ordering happens via WhatsApp — single pairs from the
+product page, full carts from the bag drawer — set the store's number in
+`src/config.js`. Cart and wishlist live in `src/store/StoreContext.jsx`,
+persist to localStorage, and surface as navbar icons plus a `/wishlist` page. `/new-arrivals`, `/sale`, `/best-sellers`, and
+`/brands` are dedicated pages, plus informational pages at `/about`,
+`/delivery`, `/returns`, `/privacy`, and `/terms` (linked from the footer).
+Brand cards deep-link to `/shop?brand=<name>`,
 which pre-selects that brand filter. Brand logo SVGs live in
 `public/images/brands/` (sourced from Wikimedia — verify licensing before
 commercial use). Each product has five images: the

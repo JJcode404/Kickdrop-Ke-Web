@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+import { useStore } from "../store/StoreContext.jsx";
+
 const BENEFITS = [
   {
     id: "delivery",
@@ -32,22 +35,23 @@ const BENEFITS = [
 ];
 
 const INFORMATION = [
-  "About Us",
-  "Delivery Information",
-  "Privacy Policy",
-  "Terms & Conditions",
+  { label: "About Us", to: "/about" },
+  { label: "Delivery Information", to: "/delivery" },
+  { label: "Privacy Policy", to: "/privacy" },
+  { label: "Terms & Conditions", to: "/terms" },
 ];
 
 const CUSTOMER_SERVICE = [
-  "Return Policy",
-  "My Account",
-  "Wishlist",
-  "Order History",
-  "International Orders",
-  "Contact",
+  { label: "Return Policy", to: "/returns" },
+  { label: "My Account", action: "auth" },
+  { label: "Wishlist", to: "/wishlist" },
+  { label: "Order History", to: "/shop" },
+  { label: "International Orders", to: "/delivery" },
+  { label: "Contact", href: "mailto:hello@kickdrop.ke" },
 ];
 
 export default function Footer() {
+  const { setAuthOpen } = useStore();
   return (
     <footer className="footer">
       <ul className="footer__benefits" role="list">
@@ -101,8 +105,8 @@ export default function Footer() {
             <h3 className="footer__heading">Information</h3>
             <ul role="list">
               {INFORMATION.map((link) => (
-                <li key={link}>
-                  <a href="/#main">{link}</a>
+                <li key={link.label}>
+                  <Link to={link.to}>{link.label}</Link>
                 </li>
               ))}
             </ul>
@@ -112,8 +116,20 @@ export default function Footer() {
             <h3 className="footer__heading">Customer Service</h3>
             <ul role="list">
               {CUSTOMER_SERVICE.map((link) => (
-                <li key={link}>
-                  <a href="/#main">{link}</a>
+                <li key={link.label}>
+                  {link.action === "auth" ? (
+                    <button
+                      type="button"
+                      className="footer__link-btn"
+                      onClick={() => setAuthOpen(true)}
+                    >
+                      {link.label}
+                    </button>
+                  ) : link.href ? (
+                    <a href={link.href}>{link.label}</a>
+                  ) : (
+                    <Link to={link.to}>{link.label}</Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -152,9 +168,9 @@ export default function Footer() {
       <div className="footer__bottom">
         <p>© {new Date().getFullYear()} KICKDROP KE. All rights reserved.</p>
         <ul className="footer__legal" role="list">
-          <li><a href="/#main">Privacy</a></li>
-          <li><a href="/#main">Terms</a></li>
-          <li><a href="/#main">Cookies</a></li>
+          <li><Link to="/privacy">Privacy</Link></li>
+          <li><Link to="/terms">Terms</Link></li>
+          <li><Link to="/privacy#cookies">Cookies</Link></li>
         </ul>
       </div>
     </footer>

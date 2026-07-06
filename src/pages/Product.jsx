@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import Gallery from "../components/product/Gallery.jsx";
+import ShopProductCard from "../components/shop/ShopProductCard.jsx";
 import { formatPrice } from "../data/products.js";
 import {
   shopProducts,
@@ -8,9 +9,10 @@ import {
   effectivePrice,
   galleryFor,
   stockStatus,
+  relatedTo,
 } from "../data/shop.js";
-
-const WHATSAPP_NUMBER = "254700000000"; // TODO: replace with the store's number
+import { useStore } from "../store/StoreContext.jsx";
+import { WHATSAPP_NUMBER } from "../config.js";
 
 const FEATURES_BY_CATEGORY = {
   running: [
@@ -152,17 +154,18 @@ export default function Product() {
   const { id } = useParams();
   const product = useMemo(() => shopProducts.find((p) => p.id === id), [id]);
 
-  const [size, setSize] = useState(null);
+  const { isWished, toggleWish, addToCart } = useStore();
+  const [size, setSize] = useState(product?.sizes[0] ?? null);
   const [color, setColor] = useState(product?.colors[0]);
-  const [wished, setWished] = useState(false);
   const [shareMsg, setShareMsg] = useState("");
+  const wished = product ? isWished(product.id) : false;
 
   if (!product) return <Navigate to="/shop" replace />;
 
   const p = product;
   const stock = stockStatus(p);
   const price = effectivePrice(p);
-  const orderable = stock.id !== "out" && size !== null;
+  const orderable = stock.id !== "out";
 
   const whatsappHref = () => {
     const lines = [
@@ -282,17 +285,23 @@ export default function Product() {
             <p className="pdp__cta-hint" role="status">
               {stock.id === "out"
                 ? "This pair is currently sold out."
-                : size === null
-                  ? "Select a size to order."
-                  : `Ordering ${p.name} — EU ${size}, ${color}, ${formatPrice(price)}.`}
+                : `Ordering ${p.name} — EU ${size}, ${color}, ${formatPrice(price)}.`}
             </p>
 
             <div className="pdp__secondary">
               <button
                 type="button"
                 className="btn btn--ghost btn--small"
+                disabled={stock.id === "out"}
+                onClick={() => addToCart({ id: p.id, size, color })}
+              >
+                Add to Bag
+              </button>
+              <button
+                type="button"
+                className="btn btn--ghost btn--small"
                 aria-pressed={wished}
-                onClick={() => setWished((v) => !v)}
+                onClick={() => toggleWish(p.id)}
               >
                 <svg className="pdp__heart" viewBox="0 0 24 24" fill={wished ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" aria-hidden="true">
                   <path d="M12 20.5C7.5 16.5 3.5 13.2 3.5 9.1 3.5 6.4 5.6 4.5 8 4.5c1.6 0 3 .8 4 2.1 1-1.3 2.4-2.1 4-2.1 2.4 0 4.5 1.9 4.5 4.6 0 4.1-4 7.4-8.5 11.4z" />
@@ -309,6 +318,18 @@ export default function Product() {
           <InfoTabs product={p} />
         </div>
       </div>
+
+      <section className="pdp__related" aria-labelledby="related-title">
+        <p className="section-heading__eyebrow">Complete the Rotation</p>
+        <h2 id="related-title" className="pdp__related-title">
+          You May Also Like
+        </h2>
+        <ul className="shop-grid" role="list">
+          {relatedTo(p).map((rp, i) => (
+            <ShopProductCard key={rp.id} product={rp} index={i} />
+          ))}
+        </ul>
+      </section>
     </article>
   );
 }
