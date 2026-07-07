@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import BestSellerCard from "../components/shop/BestSellerCard.jsx";
+import Seo from "../components/Seo.jsx";
+import { collectionLd, breadcrumbLd } from "../data/seo.js";
 import {
   bestSellersRanked,
   effectivePrice,
@@ -92,6 +94,15 @@ export default function BestSellers() {
 
   return (
     <section className="section shop arrivals" aria-labelledby="best-sellers-title">
+      <Seo
+        title="Best-Selling Sneakers in Kenya — Customer Favorites"
+        description="Kenya's most-loved sneakers ranked by sales: Nike Air Force 1, Adidas Samba OG, Nike Dunk Low Panda, New Balance 550 & more. Real ratings, verified authentic, free delivery."
+        path="/best-sellers"
+        jsonLd={[
+          collectionLd({ name: "Best Sellers", description: "KICKDROP's best-selling sneakers, ranked by units sold.", path: "/best-sellers", products: results }),
+          breadcrumbLd([{ name: "Home", path: "/" }, { name: "Best Sellers", path: "/best-sellers" }]),
+        ]}
+      />
       <header className="arrivals__hero">
         <p className="arrivals__pill">
           <span className="arrival-card__limited-dot" aria-hidden="true" />

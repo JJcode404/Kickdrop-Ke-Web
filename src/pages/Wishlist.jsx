@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import ShopProductCard from "../components/shop/ShopProductCard.jsx";
+import Seo from "../components/Seo.jsx";
 import { useStore } from "../store/StoreContext.jsx";
 import { shopProducts } from "../data/shop.js";
 
@@ -80,6 +81,7 @@ export default function Wishlist() {
 
   return (
     <section className="section shop arrivals" aria-labelledby="wishlist-title">
+      <Seo title="Wishlist" description="Your saved sneakers at KICKDROP KE." path="/wishlist" noindex />
       <header className="arrivals__hero wl__hero">
         <p className="arrivals__pill">
           <span className="arrival-card__limited-dot" aria-hidden="true" />

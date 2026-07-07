@@ -1,11 +1,20 @@
 import { Link } from "react-router-dom";
 import InfoLayout from "../../components/InfoLayout.jsx";
+import Seo from "../../components/Seo.jsx";
+import { breadcrumbLd } from "../../data/seo.js";
 import { shopProducts } from "../../data/shop.js";
 import { brandsData } from "../../data/brands.js";
 
 export default function About() {
   return (
-    <InfoLayout
+    <>
+      <Seo
+        title="About KICKDROP — Nairobi's Premium Sneaker Store"
+        description='KICKDROP is a premium sneaker store founded in Nairobi, Kenya in 2024. We hand-pick and verify authentic Nike, Jordan, Adidas & New Balance sneakers and deliver across Kenya and worldwide.'
+        path="/about"
+        jsonLd={[breadcrumbLd([{ name: "Home", path: "/" }, { name: 'About KICKDROP', path: "/about" }])]}
+      />
+      <InfoLayout
       eyebrow="Our Story"
       title="About Us"
       lede="Luxury footwear, crafted without compromise — born in Nairobi, worn everywhere."
@@ -75,6 +84,7 @@ export default function About() {
           Or start with the good part — <Link to="/shop">browse the catalogue</Link>.
         </p>
       </section>
-    </InfoLayout>
+      </InfoLayout>
+    </>
   );
 }

@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { brandsData, featuredBrands, BRAND_FOCUSES } from "../data/brands.js";
+import Seo from "../components/Seo.jsx";
+import { breadcrumbLd } from "../data/seo.js";
 
 const SORTS = [
   { id: "az", label: "A – Z" },
@@ -82,6 +84,12 @@ export default function Brands() {
 
   return (
     <section className="section shop arrivals brands" aria-labelledby="brands-title">
+      <Seo
+        title="Sneaker Brands in Kenya — Nike, Jordan, Adidas, New Balance & More"
+        description="Shop 9 iconic sneaker brands in Nairobi, Kenya: Nike, Jordan, Adidas, New Balance, ASICS, PUMA, Converse, Vans and On — every pair verified authentic with free Kenya delivery."
+        path="/brands"
+        jsonLd={[breadcrumbLd([{ name: "Home", path: "/" }, { name: "Brands", path: "/brands" }])]}
+      />
       <header className="arrivals__hero">
         <p className="arrivals__pill">
           <span className="arrival-card__limited-dot" aria-hidden="true" />

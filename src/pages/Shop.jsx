@@ -2,6 +2,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import FilterPanel from "../components/shop/FilterPanel.jsx";
 import ShopProductCard from "../components/shop/ShopProductCard.jsx";
+import Seo from "../components/Seo.jsx";
+import { collectionLd, breadcrumbLd } from "../data/seo.js";
 import { filterProducts, shopProducts, BRANDS } from "../data/shop.js";
 
 const emptyFilters = () => ({
@@ -26,7 +28,7 @@ function SkeletonCard() {
 export default function Shop({ title = "Shop", presetSort, presetAvailability }) {
   const [searchParams] = useSearchParams();
   const [loading, setLoading] = useState(true);
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(() => searchParams.get("q") ?? "");
   const [filters, setFilters] = useState(() => {
     const f = emptyFilters();
     if (presetAvailability) f.availability.add(presetAvailability);
@@ -83,8 +85,30 @@ export default function Shop({ title = "Shop", presetSort, presetAvailability })
     setQuery("");
   };
 
+  const brandParam = searchParams.get("brand");
   return (
     <section className="section shop" aria-labelledby="shop-title">
+      <Seo
+        title={brandParam ? `${brandParam} Sneakers in Kenya` : "Shop All Sneakers"}
+        description={
+          brandParam
+            ? `Buy authentic ${brandParam} sneakers in Nairobi, Kenya. Verified pairs, free delivery across Kenya, M-Pesa accepted, order on WhatsApp.`
+            : "Browse the full KICKDROP catalogue — verified-authentic Nike, Jordan, Adidas, New Balance, ASICS, PUMA, Converse, Vans and On sneakers with free delivery across Kenya."
+        }
+        path={brandParam ? `/shop?brand=${encodeURIComponent(brandParam)}` : "/shop"}
+        jsonLd={[
+          collectionLd({
+            name: brandParam ? `${brandParam} Sneakers` : "Shop All Sneakers",
+            description: "The full KICKDROP sneaker catalogue.",
+            path: "/shop",
+            products: results,
+          }),
+          breadcrumbLd([
+            { name: "Home", path: "/" },
+            { name: "Shop", path: "/shop" },
+          ]),
+        ]}
+      />
       <header className="shop__header">
         <p className="section-heading__eyebrow">The Catalogue</p>
         <h1 id="shop-title" className="section-heading__title">

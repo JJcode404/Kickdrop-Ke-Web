@@ -1,8 +1,17 @@
 import InfoLayout from "../../components/InfoLayout.jsx";
+import Seo from "../../components/Seo.jsx";
+import { breadcrumbLd } from "../../data/seo.js";
 
 export default function Privacy() {
   return (
-    <InfoLayout
+    <>
+      <Seo
+        title='Privacy Policy'
+        description="How KICKDROP KE collects, uses and protects your data — plain-language privacy policy under Kenya's Data Protection Act (2019)."
+        path="/privacy"
+        jsonLd={[breadcrumbLd([{ name: "Home", path: "/" }, { name: 'Privacy Policy', path: "/privacy" }])]}
+      />
+      <InfoLayout
       eyebrow="Your Data"
       title="Privacy Policy"
       lede="We collect the minimum, protect it properly, and never sell it. Here's the plain-language version."
@@ -74,6 +83,7 @@ export default function Privacy() {
           and access is limited to staff who fulfil orders.
         </p>
       </section>
-    </InfoLayout>
+      </InfoLayout>
+    </>
   );
 }

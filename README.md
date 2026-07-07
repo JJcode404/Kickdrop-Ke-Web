@@ -7,10 +7,28 @@ Black / white / subtle gold palette, serif display typography, lots of whitespac
 
 ```bash
 npm install
-npm run dev      # local dev server
-npm run build    # production build → dist/
-npm run preview  # serve the production build
+npm run dev        # local dev server
+npm run build      # production build → dist/ (also regenerates sitemap.xml)
+npm run build:seo  # build + prerender all 41 routes to static HTML (deploy this)
+npm run preview    # serve the production build
 ```
+
+## SEO
+
+- **Deploy `npm run build:seo` output.** The prerender step renders every
+  route in headless Chrome and writes real HTML (content, unique titles,
+  meta descriptions, canonical URLs, Open Graph tags, JSON-LD) into
+  `dist/<route>/index.html`, so search engines and AI crawlers that don't
+  execute JavaScript still see full pages. Requires Chrome (`CHROME_PATH`
+  to override).
+- Per-route head tags are managed by `src/components/Seo.jsx`; structured
+  data builders (Product, Offer, AggregateRating, BreadcrumbList,
+  CollectionPage/ItemList, FAQPage, ShoeStore LocalBusiness, Organization,
+  WebSite + SearchAction) live in `src/data/seo.js`.
+- `public/robots.txt` welcomes search + AI crawlers and points at
+  `sitemap.xml`, which is regenerated from the catalogue on every build.
+- Set the production domain in `src/config.js` (`SITE_URL`) and in
+  `scripts/generate-sitemap.mjs` + `index.html` before launch.
 
 ## Structure
 

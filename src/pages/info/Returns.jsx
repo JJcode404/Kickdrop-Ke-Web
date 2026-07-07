@@ -1,9 +1,18 @@
 import { Link } from "react-router-dom";
 import InfoLayout from "../../components/InfoLayout.jsx";
+import Seo from "../../components/Seo.jsx";
+import { breadcrumbLd } from "../../data/seo.js";
 
 export default function Returns() {
   return (
-    <InfoLayout
+    <>
+      <Seo
+        title='30-Day Sneaker Returns in Kenya'
+        description="KICKDROP's return policy: 30 days, no questions asked. Unworn pairs with box and certificate, free courier pickup anywhere in Kenya, M-Pesa refunds within 24 hours."
+        path="/returns"
+        jsonLd={[breadcrumbLd([{ name: "Home", path: "/" }, { name: '30-Day Sneaker Returns in Kenya', path: "/returns" }])]}
+      />
+      <InfoLayout
       eyebrow="Peace of Mind"
       title="Return Policy"
       lede="Change your mind, not your standards. 30-day returns, no questions asked."
@@ -66,6 +75,7 @@ export default function Returns() {
           <Link to="/delivery">Delivery Information</Link> page.
         </p>
       </section>
-    </InfoLayout>
+      </InfoLayout>
+    </>
   );
 }

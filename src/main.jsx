@@ -12,6 +12,7 @@ import "./styles/brands.css";
 import "./styles/info.css";
 import "./styles/cart.css";
 import "./styles/auth.css";
+import "./styles/chat.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

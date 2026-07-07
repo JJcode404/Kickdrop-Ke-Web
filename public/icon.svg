@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#111110"/>
+  <text x="242" y="345" font-family="Didot, 'Bodoni MT', Georgia, serif" font-size="280" fill="#fdfdfb" text-anchor="middle">K</text>
+  <circle cx="392" cy="330" r="26" fill="#c2a35e"/>
+</svg>

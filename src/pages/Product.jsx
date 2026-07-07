@@ -13,6 +13,8 @@ import {
 } from "../data/shop.js";
 import { useStore } from "../store/StoreContext.jsx";
 import { WHATSAPP_NUMBER } from "../config.js";
+import Seo from "../components/Seo.jsx";
+import { productLd, breadcrumbLd } from "../data/seo.js";
 
 const FEATURES_BY_CATEGORY = {
   running: [
@@ -195,6 +197,21 @@ export default function Product() {
 
   return (
     <article className="section pdp" aria-labelledby="pdp-title">
+      <Seo
+        title={`${p.name} — Buy in Kenya (${formatPrice(price)})`}
+        description={`Buy the ${p.name} in Nairobi, Kenya for ${formatPrice(price)}. Authentic ${p.brand} ${p.category.toLowerCase()} sneaker, verified before dispatch. Rated ${p.rating}/5 by ${p.reviews} customers. Free Kenya delivery, order on WhatsApp.`}
+        path={`/product/${p.id}`}
+        image={p.image}
+        type="product"
+        jsonLd={[
+          productLd(p),
+          breadcrumbLd([
+            { name: "Home", path: "/" },
+            { name: "Shop", path: "/shop" },
+            { name: p.name, path: `/product/${p.id}` },
+          ]),
+        ]}
+      />
       <nav className="pdp__breadcrumb" aria-label="Breadcrumb">
         <ol role="list">
           <li><Link to="/">Home</Link></li>

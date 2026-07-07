@@ -36,6 +36,7 @@ const BENEFITS = [
 
 const INFORMATION = [
   { label: "About Us", to: "/about" },
+  { label: "FAQs", to: "/faq" },
   { label: "Delivery Information", to: "/delivery" },
   { label: "Privacy Policy", to: "/privacy" },
   { label: "Terms & Conditions", to: "/terms" },

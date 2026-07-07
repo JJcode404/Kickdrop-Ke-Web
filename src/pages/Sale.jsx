@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import SaleCard from "../components/shop/SaleCard.jsx";
+import Seo from "../components/Seo.jsx";
+import { collectionLd, breadcrumbLd } from "../data/seo.js";
 import {
   saleProducts,
   discountOf,
@@ -98,6 +100,15 @@ export default function Sale() {
 
   return (
     <section className="section shop arrivals sale" aria-labelledby="sale-title">
+      <Seo
+        title={`Sneaker Sale Kenya — Up to ${maxDiscount}% Off Authentic Sneakers`}
+        description={`Sneakers on sale in Nairobi: up to ${maxDiscount}% off verified-authentic Nike, Adidas, PUMA & New Balance pairs. Limited-time offers, free delivery across Kenya, M-Pesa accepted.`}
+        path="/sale"
+        jsonLd={[
+          collectionLd({ name: "Sale", description: "Limited-time offers on authentic sneakers.", path: "/sale", products: results }),
+          breadcrumbLd([{ name: "Home", path: "/" }, { name: "Sale", path: "/sale" }]),
+        ]}
+      />
       <header className="arrivals__hero">
         <p className="arrivals__pill sale__pill">
           <span className="arrival-card__limited-dot" aria-hidden="true" />

@@ -1,9 +1,18 @@
 import { Link } from "react-router-dom";
 import InfoLayout from "../../components/InfoLayout.jsx";
+import Seo from "../../components/Seo.jsx";
+import { breadcrumbLd } from "../../data/seo.js";
 
 export default function Terms() {
   return (
-    <InfoLayout
+    <>
+      <Seo
+        title='Terms & Conditions'
+        description="KICKDROP KE's terms of sale: WhatsApp ordering, M-Pesa and card payment, KES pricing, double-refund authenticity guarantee, and Kenyan governing law."
+        path="/terms"
+        jsonLd={[breadcrumbLd([{ name: "Home", path: "/" }, { name: 'Terms & Conditions', path: "/terms" }])]}
+      />
+      <InfoLayout
       eyebrow="The Fine Print"
       title="Terms & Conditions"
       lede="The agreement between you and KICKDROP KE when you use this site or place an order."
@@ -80,6 +89,7 @@ export default function Terms() {
           700 456 789 · 123 Kimathi Street, Nairobi, Kenya.
         </p>
       </section>
-    </InfoLayout>
+      </InfoLayout>
+    </>
   );
 }

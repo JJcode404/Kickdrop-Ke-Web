@@ -1,4 +1,6 @@
 import InfoLayout from "../../components/InfoLayout.jsx";
+import Seo from "../../components/Seo.jsx";
+import { breadcrumbLd } from "../../data/seo.js";
 
 const ZONES = [
   ["Nairobi", "Free express delivery, within 24 hours of dispatch."],
@@ -9,7 +11,14 @@ const ZONES = [
 
 export default function Delivery() {
   return (
-    <InfoLayout
+    <>
+      <Seo
+        title='Sneaker Delivery in Kenya — Free Express Shipping'
+        description='Free express sneaker delivery across Kenya: Nairobi within 24 hours, nationwide in 1–2 days, worldwide in 3–5 days. Tracked, insured, dispatched same day for WhatsApp orders before 3 PM.'
+        path="/delivery"
+        jsonLd={[breadcrumbLd([{ name: "Home", path: "/" }, { name: 'Sneaker Delivery in Kenya', path: "/delivery" }])]}
+      />
+      <InfoLayout
       eyebrow="Shipping"
       title="Delivery Information"
       lede="Free express shipping across Kenya, with worldwide delivery in 3–5 days."
@@ -58,6 +67,7 @@ export default function Delivery() {
         Delivery questions? Message us on WhatsApp at + (254) 700 456 789 or
         email hello@kickdrop.ke — a human answers, 24/7.
       </p>
-    </InfoLayout>
+      </InfoLayout>
+    </>
   );
 }

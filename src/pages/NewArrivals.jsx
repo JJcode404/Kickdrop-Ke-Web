@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import NewArrivalCard from "../components/shop/NewArrivalCard.jsx";
+import Seo from "../components/Seo.jsx";
+import { collectionLd, breadcrumbLd } from "../data/seo.js";
 import { newArrivals, effectivePrice, PRICE_RANGES } from "../data/shop.js";
 
 const BRANDS = [...new Set(newArrivals.map((p) => p.brand))].sort();
@@ -75,6 +77,15 @@ export default function NewArrivals() {
 
   return (
     <section className="section shop arrivals" aria-labelledby="arrivals-title">
+      <Seo
+        title="New Sneaker Arrivals in Kenya — Latest Drops"
+        description="The latest sneaker releases in Nairobi, Kenya: Travis Scott Jordan 1 Low, Air Jordan 4 White Oreo, New Balance 530 & more. Fresh drops weekly, verified authentic, free Kenya delivery."
+        path="/new-arrivals"
+        jsonLd={[
+          collectionLd({ name: "New Arrivals", description: "The latest sneaker drops at KICKDROP.", path: "/new-arrivals", products: results }),
+          breadcrumbLd([{ name: "Home", path: "/" }, { name: "New Arrivals", path: "/new-arrivals" }]),
+        ]}
+      />
       <header className="arrivals__hero">
         <p className="arrivals__pill">
           <span className="arrival-card__limited-dot" aria-hidden="true" />
