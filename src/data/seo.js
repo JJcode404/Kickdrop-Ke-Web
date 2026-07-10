@@ -1,4 +1,4 @@
-import { SITE_URL, SITE_NAME, BUSINESS } from "../config.js";
+import { SITE_URL, SITE_NAME, BUSINESS, SOCIALS } from "../config.js";
 import { effectivePrice, galleryFor, soldOf } from "./shop.js";
 import { reviews as storeReviews } from "./products.js";
 
@@ -13,6 +13,7 @@ export const organizationLd = () => ({
   logo: abs("/icon-512.png"),
   email: BUSINESS.email,
   telephone: BUSINESS.phone,
+  sameAs: [SOCIALS.instagram, SOCIALS.tiktok],
   address: {
     "@type": "PostalAddress",
     streetAddress: BUSINESS.street,
@@ -47,6 +48,7 @@ export const localBusinessLd = () => ({
     opens: h.opens,
     closes: h.closes,
   })),
+  sameAs: [SOCIALS.instagram, SOCIALS.tiktok],
   aggregateRating: {
     "@type": "AggregateRating",
     ratingValue: "4.9",

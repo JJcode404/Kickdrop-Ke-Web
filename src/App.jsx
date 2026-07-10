@@ -5,6 +5,7 @@ import Footer from "./components/Footer.jsx";
 import CartDrawer from "./components/CartDrawer.jsx";
 import AuthModal from "./components/AuthModal.jsx";
 import ChatWidget from "./components/ChatWidget.jsx";
+import CallButton from "./components/CallButton.jsx";
 import { StoreProvider } from "./store/StoreContext.jsx";
 import Home from "./pages/Home.jsx";
 
@@ -67,6 +68,7 @@ function AppShell() {
       <CartDrawer />
       <AuthModal />
       <ChatWidget />
+      <CallButton />
       <Footer />
     </>
   );

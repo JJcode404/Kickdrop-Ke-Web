@@ -64,8 +64,9 @@ export default function Delivery() {
       </section>
 
       <p className="info__note">
-        Delivery questions? Message us on WhatsApp at + (254) 700 456 789 or
-        email hello@kickdrop.ke — a human answers, 24/7.
+        Delivery questions? Message us on WhatsApp at{" "}
+        <a href="tel:+254715369733">+ (254) 715 369 733</a> or email
+        hello@kickdrop.ke — a human answers, 24/7.
       </p>
       </InfoLayout>
     </>

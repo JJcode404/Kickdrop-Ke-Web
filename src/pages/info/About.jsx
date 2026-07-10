@@ -78,7 +78,7 @@ export default function About() {
         <p>
           123 Kimathi Street, Nairobi, Kenya ·{" "}
           <a href="mailto:hello@kickdrop.ke">hello@kickdrop.ke</a> ·{" "}
-          <a href="tel:+254700456789">+ (254) 700 456 789</a>
+          <a href="tel:+254715369733">+ (254) 715 369 733</a>
         </p>
         <p>
           Or start with the good part — <Link to="/shop">browse the catalogue</Link>.

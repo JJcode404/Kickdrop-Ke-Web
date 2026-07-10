@@ -13,6 +13,43 @@
   gap: 0.85rem;
 }
 
+/* Floating call bubble — sits just above the WhatsApp launcher */
+
+.call-fab {
+  position: fixed;
+  right: clamp(1rem, 3vw, 1.75rem);
+  bottom: calc(clamp(1rem, 3vw, 1.75rem) + 3.5rem + 0.85rem);
+  z-index: 65; /* matches the chat widget stack */
+  width: 3.5rem;
+  height: 3.5rem;
+  display: grid;
+  place-items: center;
+  background: var(--gold-bright);
+  color: var(--ink);
+  border-radius: 50%;
+  box-shadow: 0 16px 40px -12px rgba(17, 17, 16, 0.45);
+  transition:
+    background 0.25s var(--ease-out),
+    color 0.25s var(--ease-out),
+    transform 0.2s var(--ease-out);
+}
+
+.call-fab svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.call-fab:hover,
+.call-fab:focus-visible {
+  background: var(--ink);
+  color: var(--paper);
+  transform: scale(1.06);
+}
+
+.call-fab:active {
+  transform: scale(0.94);
+}
+
 /* Launcher bubble */
 
 .chat__launcher {

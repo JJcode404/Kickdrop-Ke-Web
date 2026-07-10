@@ -12,6 +12,7 @@ export const SWATCH_HEX = {
   Clay: "#c68e5f",
   Pink: "#e79fc4",
   Blue: "#a8c8e0",
+  Red: "#c0392b",
 };
 
 const r = (from, to) => {
@@ -24,24 +25,13 @@ const r = (from, to) => {
 const META = {
   "nike-air-force-1-07": { brand: "Nike", rating: 4.9, reviews: 1284, colors: ["White"], sizes: r(38, 46), added: 3 },
   "nike-dunk-low-panda": { brand: "Nike", rating: 4.8, reviews: 962, colors: ["White", "Black"], sizes: r(38, 45), added: 8 },
-  "nike-air-max-90": { brand: "Nike", rating: 4.7, reviews: 731, colors: ["White"], sizes: r(39, 46), added: 5, salePrice: 12950 },
-  "nike-air-max-270": { brand: "Nike", rating: 4.5, reviews: 618, colors: ["Black", "White"], sizes: r(38, 46), added: 4, salePrice: 14700 },
-  "nike-zoom-vomero-5": { brand: "Nike", rating: 4.8, reviews: 402, colors: ["Cream"], sizes: r(36, 42), added: 18, isNew: true },
   "adidas-samba-og": { brand: "Adidas", rating: 4.9, reviews: 1105, colors: ["White", "Black", "Gum"], sizes: r(36, 46), added: 10 },
   "adidas-gazelle-indoor": { brand: "Adidas", rating: 4.7, reviews: 356, colors: ["Green", "Gum"], sizes: r(36, 45), added: 17, isNew: true, lowStock: true },
-  "adidas-campus-00s": { brand: "Adidas", rating: 4.6, reviews: 489, colors: ["Black", "White"], sizes: r(36, 46), added: 9, salePrice: 12400 },
-  "adidas-ultraboost-light": { brand: "Adidas", rating: 4.6, reviews: 275, colors: ["Black"], sizes: r(39, 46), added: 7, salePrice: 18200 },
-  "new-balance-550": { brand: "New Balance", rating: 4.8, reviews: 847, colors: ["White", "Grey"], sizes: r(38, 46), added: 6 },
+  "adidas-campus-00s": { brand: "Adidas", rating: 4.6, reviews: 489, colors: ["Black", "White"], sizes: r(36, 46), added: 9 },
   "new-balance-9060": { brand: "New Balance", rating: 4.7, reviews: 318, colors: ["Cream", "White"], sizes: r(38, 46), added: 16, isNew: true },
-  "new-balance-2002r": { brand: "New Balance", rating: 4.7, reviews: 522, colors: ["Grey"], sizes: r(38, 46), added: 11, salePrice: 9900 },
   "asics-gel-kayano-14": { brand: "ASICS", rating: 4.8, reviews: 294, colors: ["White", "Silver"], sizes: r(38, 46), added: 14 },
-  "asics-gel-1130": { brand: "ASICS", rating: 4.6, reviews: 233, colors: ["White", "Clay"], sizes: r(38, 46), added: 12, salePrice: 12900 },
-  "puma-palermo": { brand: "PUMA", rating: 4.5, reviews: 187, colors: ["White", "Grey", "Gum"], sizes: r(36, 45), added: 19, isNew: true },
-  "puma-suede-classic-xxi": { brand: "PUMA", rating: 4.6, reviews: 445, colors: ["Black", "White"], sizes: r(36, 46), added: 2, salePrice: 5500, lowStock: true },
-  "converse-chuck-taylor-high": { brand: "Converse", rating: 4.7, reviews: 1530, colors: ["Black", "White"], sizes: r(36, 46), added: 1, soldOut: true, salePrice: 5950 },
+  "asics-gel-1130": { brand: "ASICS", rating: 4.6, reviews: 233, colors: ["White", "Clay"], sizes: r(38, 46), added: 12 },
   "vans-knu-skool": { brand: "Vans", rating: 4.6, reviews: 264, colors: ["Black", "White"], sizes: r(36, 45), added: 20, isNew: true },
-  "jordan-1-retro-high-og": { brand: "Jordan", rating: 4.9, reviews: 903, colors: ["Ochre", "Black", "White"], sizes: r(38, 46), added: 15, lowStock: true },
-  "on-cloud-5": { brand: "On", rating: 4.5, reviews: 341, colors: ["Black"], sizes: r(38, 46), added: 13, salePrice: 21250 },
   "nike-air-force-1-black": { brand: "Nike", rating: 4.8, reviews: 1096, colors: ["Black"], sizes: r(38, 46), added: 21 },
   "new-balance-9060-shadow-grey": { brand: "New Balance", rating: 4.7, reviews: 154, colors: ["Grey", "Black"], sizes: r(38, 46), added: 22 },
   "new-balance-530": { brand: "New Balance", rating: 4.7, reviews: 611, colors: ["White", "Silver"], sizes: r(36, 46), added: 23 },
@@ -49,8 +39,9 @@ const META = {
   "asics-gel-kayano-14-pink-glow": { brand: "ASICS", rating: 4.7, reviews: 142, colors: ["Pink", "Silver"], sizes: r(36, 42), added: 25, isNew: true },
   "asics-gel-kayano-14-arctic-sky": { brand: "ASICS", rating: 4.7, reviews: 188, colors: ["Blue", "Silver"], sizes: r(36, 45), added: 26, isNew: true },
   "new-balance-1000-pink": { brand: "New Balance", rating: 4.6, reviews: 87, colors: ["Pink", "Cream"], sizes: r(36, 45), added: 27, isNew: true },
-  "jordan-4-white-oreo": { brand: "Jordan", rating: 4.8, reviews: 356, colors: ["White", "Grey"], sizes: r(38, 46), added: 28, isNew: true },
+  "jordan-4-white-oreo": { brand: "Jordan", rating: 4.8, reviews: 356, colors: ["White", "Grey"], sizes: r(38, 46), added: 28, isNew: true, salePrice: 4000 },
   "jordan-1-low-travis-scott": { brand: "Jordan", rating: 4.9, reviews: 412, colors: ["Black"], sizes: r(38, 46), added: 29, isNew: true, lowStock: true },
+  "puma-speedcat-og-red": { brand: "PUMA", rating: 4.7, reviews: 96, colors: ["Red", "White"], sizes: r(36, 45), added: 30, isNew: true },
 };
 
 export const shopProducts = products.map((p) => ({ ...p, ...META[p.id] }));

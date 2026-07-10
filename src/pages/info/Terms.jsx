@@ -85,8 +85,9 @@ export default function Terms() {
       <section aria-label="Contact">
         <h2>Questions</h2>
         <p>
-          <a href="mailto:hello@kickdrop.ke">hello@kickdrop.ke</a> · + (254)
-          700 456 789 · 123 Kimathi Street, Nairobi, Kenya.
+          <a href="mailto:hello@kickdrop.ke">hello@kickdrop.ke</a> ·{" "}
+          <a href="tel:+254715369733">+ (254) 715 369 733</a> · 123 Kimathi
+          Street, Nairobi, Kenya.
         </p>
       </section>
       </InfoLayout>

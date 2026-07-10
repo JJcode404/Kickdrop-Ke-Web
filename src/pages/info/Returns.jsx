@@ -48,7 +48,8 @@ export default function Returns() {
         <h2>How to Start a Return</h2>
         <ul className="info__list">
           <li>
-            Message us on WhatsApp at + (254) 700 456 789 or email{" "}
+            Message us on WhatsApp at{" "}
+            <a href="tel:+254715369733">+ (254) 715 369 733</a> or email{" "}
             <a href="mailto:hello@kickdrop.ke">hello@kickdrop.ke</a> with your
             order details.
           </li>

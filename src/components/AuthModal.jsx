@@ -12,7 +12,7 @@ function SocialButton({ label, children, onClick }) {
   );
 }
 
-function PasswordField({ id, label, value, onChange, autoComplete }) {
+function PasswordField({ id, label, value, onChange, autoComplete, minLength = 6 }) {
   const [visible, setVisible] = useState(false);
   return (
     <div className="auth__field">
@@ -25,7 +25,7 @@ function PasswordField({ id, label, value, onChange, autoComplete }) {
           onChange={onChange}
           autoComplete={autoComplete}
           required
-          minLength={6}
+          minLength={minLength}
         />
         <button
           type="button"
@@ -46,12 +46,13 @@ function PasswordField({ id, label, value, onChange, autoComplete }) {
 }
 
 export default function AuthModal() {
-  const { authOpen, setAuthOpen, user, signIn, signOut } = useStore();
+  const { authOpen, setAuthOpen, user, signIn, register, signOut } = useStore();
   const [tab, setTab] = useState("signin"); // "signin" | "register"
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState("");
+  const [busy, setBusy] = useState(false);
   const panelRef = useRef(null);
 
   useEffect(() => {
@@ -69,21 +70,36 @@ export default function AuthModal() {
 
   if (!authOpen) return null;
 
-  const displayName = (em) => em.split("@")[0].replace(/[._-]+/g, " ");
-
-  const submitSignIn = (e) => {
+  const submitSignIn = async (e) => {
     e.preventDefault();
     if (!EMAIL_RE.test(email)) return setStatus("Please enter a valid email address.");
-    if (password.length < 6) return setStatus("Password must be at least 6 characters.");
-    signIn({ name: displayName(email), email });
+    if (!password) return setStatus("Please enter your password.");
+    setStatus("");
+    setBusy(true);
+    try {
+      await signIn({ email, password });
+    } catch (err) {
+      setStatus(err?.message || "Couldn't sign in — please try again.");
+    } finally {
+      setBusy(false);
+    }
   };
 
-  const submitRegister = (e) => {
+  const submitRegister = async (e) => {
     e.preventDefault();
     if (name.trim().length < 2) return setStatus("Please enter your name.");
     if (!EMAIL_RE.test(email)) return setStatus("Please enter a valid email address.");
-    if (password.length < 6) return setStatus("Password must be at least 6 characters.");
-    signIn({ name: name.trim(), email });
+    if (password.length < 8)
+      return setStatus("Password must be at least 8 characters, with a letter and a number.");
+    setStatus("");
+    setBusy(true);
+    try {
+      await register({ name: name.trim(), email, password });
+    } catch (err) {
+      setStatus(err?.message || "Couldn't create your account — please try again.");
+    } finally {
+      setBusy(false);
+    }
   };
 
   const notAvailable = (what) =>
@@ -187,8 +203,8 @@ export default function AuthModal() {
                 >
                   Forgot your password?
                 </button>
-                <button type="submit" className="btn btn--primary auth__submit">
-                  Sign In
+                <button type="submit" className="btn btn--primary auth__submit" disabled={busy}>
+                  {busy ? "Signing in…" : "Sign In"}
                 </button>
                 <button
                   type="button"
@@ -228,9 +244,10 @@ export default function AuthModal() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   autoComplete="new-password"
+                  minLength={8}
                 />
-                <button type="submit" className="btn btn--primary auth__submit">
-                  Create Account
+                <button type="submit" className="btn btn--primary auth__submit" disabled={busy}>
+                  {busy ? "Creating…" : "Create Account"}
                 </button>
                 <p className="auth__terms">
                   By registering you agree to our Terms &amp; Conditions and

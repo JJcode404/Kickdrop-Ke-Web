@@ -100,12 +100,14 @@ export default function CartDrawer() {
   }, 0);
 
   const whatsappHref = () => {
-    const lines = cart.map((item, i) => {
-      const p = productOf(item);
-      // items added straight from cards default to the first available size
-      const size = item.size ?? p.sizes[0];
-      return `${i + 1}. ${p.name} — ${item.color}, EU ${size} ×${item.qty} — ${formatPrice(effectivePrice(p) * item.qty)}`;
-    });
+    const lines = cart
+      .map((item) => ({ item, p: productOf(item) }))
+      .filter(({ p }) => p) // skip items whose product is no longer in the catalogue
+      .map(({ item, p }, i) => {
+        // items added straight from cards default to the first available size
+        const size = item.size ?? p.sizes[0];
+        return `${i + 1}. ${p.name} — ${item.color}, EU ${size} ×${item.qty} — ${formatPrice(effectivePrice(p) * item.qty)}`;
+      });
     const msg = [
       "Hi KICKDROP, I'd like to place an order:",
       "",

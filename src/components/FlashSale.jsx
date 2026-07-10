@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { formatPrice } from "../data/products.js";
 import { shopProducts, discountOf } from "../data/shop.js";
 
-const DEAL_ID = "new-balance-2002r";
+const DEAL_ID = "jordan-4-white-oreo";
 const ENDS_AT = new Date("2026-12-24T00:00:00");
 
 const pad = (n) => String(n).padStart(2, "0");
@@ -26,6 +26,10 @@ function useCountdown(target) {
 export default function FlashSale() {
   const deal = shopProducts.find((p) => p.id === DEAL_ID);
   const { days, hours, minutes, seconds } = useCountdown(ENDS_AT);
+
+  // A flash sale needs a real discount. If the deal product is missing or has
+  // no sale price, don't render the section rather than show "0% OFF" / "NaN".
+  if (!deal || !deal.salePrice) return null;
 
   const units = [
     { value: days, label: days === 1 ? "Day" : "Days" },
@@ -90,11 +94,11 @@ export default function FlashSale() {
 
         <div className="flash__copy">
           <h2 id="flash-title" className="flash__title">
-            Classic NB Lifestyle
+            Iconic Air Jordan 4
           </h2>
           <p className="flash__lede">
-            The {deal.name} — premium suede and mesh over N-ERGY cushioning, in
-            the grey that started it all. Half price at {formatPrice(deal.salePrice)},
+            The {deal.name} — tech-woven mesh, visible Nike Air, and that clean
+            grey speckle on white. Yours at {formatPrice(deal.salePrice)},
             until the timer runs out.
           </p>
           <Link to={`/product/${deal.id}`} className="flash__cta">

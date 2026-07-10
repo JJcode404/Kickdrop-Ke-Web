@@ -1,5 +1,29 @@
 import { Link } from "react-router-dom";
 import { useStore } from "../store/StoreContext.jsx";
+import { PHONE_TEL, PHONE_DISPLAY, SOCIALS } from "../config.js";
+
+const SOCIAL_LINKS = [
+  {
+    id: "instagram",
+    label: "Instagram",
+    href: SOCIALS.instagram,
+    icon: (
+      <>
+        <rect x="3" y="3" width="18" height="18" rx="5" />
+        <circle cx="12" cy="12" r="4" />
+        <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none" />
+      </>
+    ),
+  },
+  {
+    id: "tiktok",
+    label: "TikTok",
+    href: SOCIALS.tiktok,
+    icon: (
+      <path d="M15 4c.3 2.4 1.9 4 4.3 4.2v2.6c-1.5.1-2.9-.3-4.3-1.1v5.6a5.3 5.3 0 1 1-5.3-5.3c.3 0 .5 0 .8.1v2.7a2.6 2.6 0 1 0 1.8 2.5V4z" />
+    ),
+  },
+];
 
 const BENEFITS = [
   {
@@ -83,8 +107,20 @@ export default function Footer() {
           <p className="footer__logo">
             KICKDROP KE<span className="navbar__brand-dot">.</span>
           </p>
-          <a className="footer__phone" href="tel:+254700456789">
-            + (254) 700 456 789
+          <a className="footer__phone" href={`tel:${PHONE_TEL}`}>
+            <svg
+              className="footer__phone-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M4 5a1 1 0 0 1 1-1h2.6a1 1 0 0 1 1 .76l.9 3.6a1 1 0 0 1-.29.95l-1.6 1.6a13 13 0 0 0 5.9 5.9l1.6-1.6a1 1 0 0 1 .95-.29l3.6.9a1 1 0 0 1 .76 1V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5z" />
+            </svg>
+            {PHONE_DISPLAY}
           </a>
           <p className="footer__tagline">
             Luxury footwear, crafted without compromise. Icons and future
@@ -99,6 +135,32 @@ export default function Footer() {
           >
             View on map <span className="arrow" aria-hidden="true">→</span>
           </a>
+
+          <ul className="footer__socials" role="list" aria-label="Follow us">
+            {SOCIAL_LINKS.map((s) => (
+              <li key={s.id}>
+                <a
+                  className="footer__social"
+                  href={s.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={s.label}
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    {s.icon}
+                  </svg>
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <nav className="footer__nav" aria-label="Footer">
@@ -144,7 +206,7 @@ export default function Footer() {
               </p>
               <p>
                 <strong>Telephone:</strong>{" "}
-                <a href="tel:+254700456789">+ (254) 700 456 789</a>
+                <a href={`tel:${PHONE_TEL}`}>{PHONE_DISPLAY}</a>
               </p>
               <p>
                 <strong>Email:</strong>{" "}

@@ -1084,12 +1084,20 @@
 }
 
 .footer__phone {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
   font-family: var(--font-display);
   font-size: 1.2rem;
   color: var(--gold-bright);
   text-decoration: none;
   margin-bottom: 1rem;
+}
+
+.footer__phone-icon {
+  width: 1.1rem;
+  height: 1.1rem;
+  flex-shrink: 0;
 }
 
 .footer__phone:hover,
@@ -1126,6 +1134,39 @@
 .footer__map-link:hover,
 .footer__map-link:focus-visible {
   color: var(--gold-bright);
+}
+
+.footer__socials {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.footer__social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: var(--paper);
+  transition:
+    color 0.3s var(--ease-out),
+    border-color 0.3s var(--ease-out),
+    transform 0.3s var(--ease-out);
+}
+
+.footer__social svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.footer__social:hover,
+.footer__social:focus-visible {
+  color: var(--gold-bright);
+  border-color: var(--gold-bright);
+  transform: translateY(-2px);
 }
 
 .footer__nav {
